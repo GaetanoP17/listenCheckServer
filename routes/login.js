@@ -23,12 +23,13 @@ router.post('/', function(req,res,next)
                 {
                     "email": rows[0].email,
                     "type": rows[0].tipo,
-                    "state": rows[0].stato
+                    "state": rows[0].stato,
+                    "nome": rows[0].nome,
+                    "cognome": rows[0].cognome
                 }
 
             console.log("Send the response to client..." + JSON.stringify(response));
             res.json(response);
-            //connection.end();
         }
     });
 });

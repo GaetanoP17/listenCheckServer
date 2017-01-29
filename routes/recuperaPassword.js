@@ -35,7 +35,7 @@ router.post('/', function(req,res,next)
             {
                 if(error)
                 {
-                    console.log("ffff"+error);
+                    console.log(error);
                     res.send("Problemi con il server");
                 }
                 else

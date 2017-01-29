@@ -13,6 +13,7 @@ var registrazioneUtente= require('./routes/registrazioneUtente');
 var recuperaPassword = require ('./routes/recuperaPassword');
 var profiloUtente = require('./routes/profiloUtente');
 var registrazioneLogopedista = require('./routes/registrazioneLogopedista');
+var cercaLogopedista = require('./routes/cercaLogopedista');
 var connectionDB= require('./routes/connessioneDB');
 var mailer= require('./routes/mailer');
 
@@ -38,6 +39,7 @@ app.use('/registrazioneUtente',registrazioneUtente);
 app.use('/recuperaPassword',recuperaPassword);
 app.use('/profiloUtente',profiloUtente);
 app.use('/registrazioneLogopedista',registrazioneLogopedista);
+app.use('/cercaLogopedista', cercaLogopedista);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
