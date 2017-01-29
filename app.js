@@ -11,6 +11,8 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var registrazioneUtente= require('./routes/registrazioneUtente');
 var recuperaPassword = require ('./routes/recuperaPassword');
+var profiloUtente = require('./routes/profiloUtente');
+var registrazioneLogopedista = require('./routes/registrazioneLogopedista');
 var connectionDB= require('./routes/connessioneDB');
 var mailer= require('./routes/mailer');
 
@@ -34,7 +36,8 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/registrazioneUtente',registrazioneUtente);
 app.use('/recuperaPassword',recuperaPassword);
-//app.use('/connectionDB',connectionDB);
+app.use('/profiloUtente',profiloUtente);
+app.use('/registrazioneLogopedista',registrazioneLogopedista);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
