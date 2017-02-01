@@ -16,6 +16,9 @@ var registrazioneLogopedista = require('./routes/registrazioneLogopedista');
 var cercaLogopedista = require('./routes/cercaLogopedista');
 var connectionDB= require('./routes/connessioneDB');
 var mailer= require('./routes/mailer');
+var esercitazione = require('./routes/esercitazione');
+var apprendimento = require('./routes/apprendimento');
+var progressiPaziente = require('./routes/progressiPaziente');
 
 var app = express();
 
@@ -40,6 +43,9 @@ app.use('/recuperaPassword',recuperaPassword);
 app.use('/profiloUtente',profiloUtente);
 app.use('/registrazioneLogopedista',registrazioneLogopedista);
 app.use('/cercaLogopedista', cercaLogopedista);
+app.use('/esercitazione', esercitazione);
+app.use('/apprendimento', apprendimento);
+app.use('/progressiPaziente', progressiPaziente);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
