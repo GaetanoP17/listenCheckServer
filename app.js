@@ -1,14 +1,26 @@
 var express = require('express');
 var cors = require('cors');
+var multer = require('multer');
+var findRemoveSync = require('find-remove');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var index = require('./routes/index');
+var update_suono = require('./routes/update_suono');
 var users = require('./routes/users');
+var menupaziente = require('./routes/menupaziente');
 var login = require('./routes/login');
+var insert_suono = require('./routes/insert_suono');
+var delete_all = require('./routes/delete_all');
+var upload_image = require('./routes/upload_image');
+var upload_sound = require('./routes/upload_sound');
+var insert_datimedia = require('./routes/insert_datimedia');
+var menucommunity = require('./routes/menucommunity');
+var categorie = require('./routes/categorie');
 var registrazioneUtente= require('./routes/registrazioneUtente');
 var recuperaPassword = require ('./routes/recuperaPassword');
 var profiloUtente = require('./routes/profiloUtente');
@@ -19,6 +31,9 @@ var mailer= require('./routes/mailer');
 var esercitazione = require('./routes/esercitazione');
 var apprendimento = require('./routes/apprendimento');
 var progressiPaziente = require('./routes/progressiPaziente');
+
+
+
 
 var app = express();
 
@@ -34,10 +49,35 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.header('Access-Control-Allow-Origin', 'http://172.19.17.150:3000');
+
+    // Request methods you wish to allow
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.header('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 app.use('/', index);
 app.use('/users', users);
 app.use('/login', login);
+app.use('/upload_image', upload_image);
+app.use('/delete_all', delete_all);
+app.use('/insert_datimedia', insert_datimedia);
+app.use('/upload_sound', upload_sound);
+app.use('/menucommunity', menucommunity);
+app.use('/categorie', categorie);
+app.use('/insert_suono', insert_suono);
+app.use('/update_suono', update_suono);
 app.use('/registrazioneUtente',registrazioneUtente);
 app.use('/recuperaPassword',recuperaPassword);
 app.use('/profiloUtente',profiloUtente);
@@ -46,6 +86,13 @@ app.use('/cercaLogopedista', cercaLogopedista);
 app.use('/esercitazione', esercitazione);
 app.use('/apprendimento', apprendimento);
 app.use('/progressiPaziente', progressiPaziente);
+app.use('/menupaziente', menupaziente);
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
