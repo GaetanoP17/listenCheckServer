@@ -9,7 +9,7 @@ router.post("/", function (req,res,next)
 {
     var email=req.body.email;
     var queryString= "SELECT * FROM account WHERE email=" + connection.escape(email);
-    console.log("This is the query to DB: " +queryString);
+
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
@@ -22,9 +22,9 @@ router.post("/", function (req,res,next)
                     "sesso": rows[0].sesso,
                     "cf": rows[0].cf,
                     "telefono": rows[0].telefono,
-                    "citta": rows[0].citta
+                    "citta": rows[0].citta,
+                    "pass": rows[0].password
                 }
-            console.log("Send the response to client..." + response);
             res.json(response);
 
     });
@@ -40,8 +40,9 @@ router.post("/update", function(req, res,next)
     var cf= req.body.cf;
     var telefono= req.body.telefono;
     var citta= req.body.citta;
+    var pass = req.body.pass;
 
-    connection.query('UPDATE account SET nome = ?, cognome = ?, dataDiNascita = ?, sesso = ?, cf = ?, telefono = ?, citta = ? Where email = ?', [nome, cognome, data, sesso, cf, telefono, citta, email], function (err, rows)
+    connection.query('UPDATE account SET nome = ?, password = ?, cognome = ?, dataDiNascita = ?, sesso = ?, cf = ?, telefono = ?, citta = ? Where email = ?', [nome, pass, cognome, data, sesso, cf, telefono, citta, email], function (err, rows)
     {
         if (err) throw err;
         response = "Done";

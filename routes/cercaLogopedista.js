@@ -9,9 +9,8 @@ var transporter = require('./mailer');
 
 router.post('/', function (req, res, next) {
     var queryString = "SELECT * FROM account WHERE tipo = 'L'";
-    console.log(queryString);
+
     connection.query(queryString, function (err, rows) {
-        //var response="{terapisti:[";
         var response;
         var terapisti = new Array();
         for (var i in rows) {
@@ -23,35 +22,84 @@ router.post('/', function (req, res, next) {
             })
         }
         response = terapisti;
-        console.log("Send the response to client..." + JSON.stringify(response));
-        console.log("Send the response to client..." + response);
         res.json(response);
     });
 
+});
+router.post('/mio', function (req, res, next) {
+    var email = req.body.email;
+    var queryString = "SELECT * FROM collabora WHERE utente = " + connection.escape(email);
+
+    connection.query(queryString, function (err, rows) {
+        if (err) throw err;
+
+        var response = rows[0].logopedista;
+        res.send(response);
+    });
+});
+
+router.post('/disassocia', function (req, res, next) {
+    var email = req.body.paziente;
+    var queryString = "DELETE FROM collabora WHERE utente = " + connection.escape(email);
+
+    connection.query(queryString, function (err, rows) {
+        if (err) throw err;
+        else {
+            connection.query('UPDATE account SET stato = ? WHERE email = ?', [0, email], function (err, rows) {
+                if (err) throw err;
+            });
+            res.send("Done");
+        }
+    });
 });
 
 router.post('/invia', function (req, res, next) {
     var email = req.body.email;
     var nome = req.body.nome;
     var cognome = req.body.cognome;
-    var text = "Il Sig." + nome + " " + cognome + " le ha appena inviato una richiesta di colloborazione.\n ";
-    text = text + "Controlli la sezione \"Gestione Collaborazioni\" in ListenCheck. \n ";
-    text = text + "Saluti, \n ListenCheck";
-    var mailOptions = {
-        from: 'ubmplatform@gmail.com',
-        to: email,
-        subject: 'ListenCheck - Nuova richiesta di collaborazione',
-        text: text
+    var paziente = req.body.paziente;
+    var data = new Date();
+    var collabora = {
+        'logopedista': email,
+        'utente': paziente,
+        'data_inizio': data,
+        'stato': 0,
+        'nome': nome,
+        'cognome': cognome
     };
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            res.send("Problemi con il server");
-        }
-        else {
-            console.log('Message sent: ' + info.response);
-            res.send("Inviata");
-        }
-    })
+    var text = "Il Sig." + nome + " " + cognome + " le ha appena inviato una richiesta di colloborazione.\n\n";
+    text = text + "Controlli la sezione \"Gestione Collaborazioni\" in ListenCheck. \n\n\n";
+    text = text + "Saluti, \nListenCheck";
+
+    connection.query('INSERT INTO collabora SET ?', collabora, function (err, rows) {
+        if (err) throw err;
+
+
+        var mailOptions = {
+            from: 'ubmplatform@gmail.com',
+            to: email,
+            subject: 'ListenCheck - Nuova richiesta di collaborazione',
+            text: text
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                res.send("Problemi con il server");
+            }
+            else {
+                res.send("Inviata");
+            }
+        });
+    });
+});
+router.post('/check', function (req, res, next) {
+    var email = req.body.email;
+    var queryString = "SELECT * FROM account WHERE email = " + connection.escape(email);
+
+    connection.query(queryString, function (err, rows) {
+        if (err) throw err;
+
+        var response = rows[0].stato + "";
+        res.send(response);
+    });
 });
 module.exports = router;

@@ -13,8 +13,7 @@ router.post('/', function(req,res,next)
     var password;
     var email=req.body.email;
     var queryString= "SELECT * FROM account WHERE email = "+connection.escape(email);
-    console.log("email: "+email);
-    console.log(queryString);
+
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
@@ -23,7 +22,7 @@ router.post('/', function(req,res,next)
         else
         {
             password=rows[0].password;
-            console.log("la password è: "+password);
+
             var text= "La password per accedere all'applicazione è: " + password;
             var mailOptions = {
                 from: 'ubmplatform@gmail.com',
@@ -35,12 +34,10 @@ router.post('/', function(req,res,next)
             {
                 if(error)
                 {
-                    console.log(error);
                     res.send("Problemi con il server");
                 }
                 else
                 {
-                    console.log('Message sent: ' + info.response);
                     res.send("Inviata");
                 }
             })

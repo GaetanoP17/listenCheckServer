@@ -9,20 +9,18 @@ router.post('/check', function(req,res,next)
 {
     var email=req.body.email;
     var queryString= "SELECT * FROM account WHERE email=" + connection.escape(email);
-    console.log("This is the query to DB: " +queryString);
+
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
         if ( rows.length == 0)
         {
             var response="NoMatch";
-            console.log("Send the response to client..." + response);
             res.send(response);
         }
         else
         {
             var response="Match";
-            console.log("Send the response to client..." + response);
             res.send(response);
         }
     });
@@ -39,7 +37,6 @@ router.post('/', function(req,res,next)
         if(err) throw err;
 
         response = "Registrazione avvenuta con successo";
-        console.log("Send the response to client..." + response);
         res.send(response);
     });
 });

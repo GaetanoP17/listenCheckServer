@@ -8,7 +8,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
 var index = require('./routes/index');
 var update_suono = require('./routes/update_suono');
 var users = require('./routes/users');
@@ -26,6 +25,7 @@ var recuperaPassword = require ('./routes/recuperaPassword');
 var profiloUtente = require('./routes/profiloUtente');
 var registrazioneLogopedista = require('./routes/registrazioneLogopedista');
 var cercaLogopedista = require('./routes/cercaLogopedista');
+var gestioneCollaborazioni = require('./routes/gestioneCollaborazioni');
 var connectionDB= require('./routes/connessioneDB');
 var mailer= require('./routes/mailer');
 var esercitazione = require('./routes/esercitazione');
@@ -83,6 +83,7 @@ app.use('/recuperaPassword',recuperaPassword);
 app.use('/profiloUtente',profiloUtente);
 app.use('/registrazioneLogopedista',registrazioneLogopedista);
 app.use('/cercaLogopedista', cercaLogopedista);
+app.use('/gestioneCollaborazioni', gestioneCollaborazioni);
 app.use('/esercitazione', esercitazione);
 app.use('/apprendimento', apprendimento);
 app.use('/progressiPaziente', progressiPaziente);

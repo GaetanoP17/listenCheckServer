@@ -8,10 +8,9 @@ router.post('/', function(req,res,next)
     var email=req.body.email.toLowerCase();
     var password=req.body.password;
     var response;
-
     var queryString= "SELECT * FROM account WHERE email=" + connection.escape(email) +" AND password=" + connection.escape(password);
 
-    console.log("This is the query to DB: " +queryString);
+
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
@@ -28,7 +27,6 @@ router.post('/', function(req,res,next)
                     "cognome": rows[0].cognome
                 }
 
-            console.log("Send the response to client..." + JSON.stringify(response));
             res.json(response);
         }
     });
