@@ -23,8 +23,7 @@ connection.connect;
 
 router.post('/', function(req,res,next)
 {
-	console.log(req.body.email);
-	c="muoccio@hotmail.it";
+    c = req.body.email;
 	connection.query('SELECT account.nome as nome, account.cognome as cognome, account.email as email  FROM account INNER JOIN collabora ON collabora.stato=1 AND logopedista=? AND  utente=email',c, function(err, rows, fields) {
     if (!err){
 				    res.send(rows);

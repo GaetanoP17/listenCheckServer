@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
 });
 router.post('/mio', function (req, res, next) {
     var email = req.body.email;
-    var queryString = "SELECT * FROM collabora WHERE utente = " + connection.escape(email);
+    var queryString = "SELECT * FROM collabora WHERE utente = " + connection.escape(email) + "AND stato=1";
 
     connection.query(queryString, function (err, rows) {
         if (err) throw err;
@@ -70,25 +70,32 @@ router.post('/invia', function (req, res, next) {
     var text = "Il Sig." + nome + " " + cognome + " le ha appena inviato una richiesta di colloborazione.\n\n";
     text = text + "Controlli la sezione \"Gestione Collaborazioni\" in ListenCheck. \n\n\n";
     text = text + "Saluti, \nListenCheck";
-
-    connection.query('INSERT INTO collabora SET ?', collabora, function (err, rows) {
+    connection.query("SELECT * FROM collabora WHERE logopedista= " + connection.escape(email) + "AND utente= " + connection.escape(paziente), function (err, rows) {
         if (err) throw err;
+        if (rows.length != 0) {
+            res.send("Already");
+        }
+        else {
+            connection.query('INSERT INTO collabora SET ?', collabora, function (err, rows) {
+                if (err) throw err;
 
 
-        var mailOptions = {
-            from: 'ubmplatform@gmail.com',
-            to: email,
-            subject: 'ListenCheck - Nuova richiesta di collaborazione',
-            text: text
-        };
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                res.send("Problemi con il server");
-            }
-            else {
-                res.send("Inviata");
-            }
-        });
+                var mailOptions = {
+                    from: 'ubmplatform@gmail.com',
+                    to: email,
+                    subject: 'ListenCheck - Nuova richiesta di collaborazione',
+                    text: text
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        res.send("Problemi con il server");
+                    }
+                    else {
+                        res.send("Inviata");
+                    }
+                });
+            });
+        }
     });
 });
 router.post('/check', function (req, res, next) {
