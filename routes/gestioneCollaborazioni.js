@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
 var connection = require('./connessioneDB');
 var transporter = require('./mailer');
 
@@ -39,7 +38,7 @@ router.post('/accetta', function (req, res, next) {
     text = text + "Saluti, \nListenCheck";
 
     var mailOptions = {
-        from: 'ubmplatform@gmail.com',
+        from: 'listenCheck@gmail.com',
         to: utente,
         subject: 'ListenCheck - Collaborazioni',
         text: text
@@ -82,7 +81,7 @@ router.post('/rifiuta', function (req, res, next) {
     text = text + "Saluti, \nListenCheck";
 
     var mailOptions = {
-        from: 'ubmplatform@gmail.com',
+        from: 'listenCheck@gmail.com',
         to: utente,
         subject: 'ListenCheck - Collaborazioni',
         text: text

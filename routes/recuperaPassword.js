@@ -3,8 +3,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-var nodemailer = require('nodemailer');
 var connection = require('./connessioneDB');
 var transporter = require('./mailer');
 
@@ -25,7 +23,7 @@ router.post('/', function(req,res,next)
 
             var text= "La password per accedere all'applicazione è: " + password;
             var mailOptions = {
-                from: 'ubmplatform@gmail.com',
+                from: 'listenCheck@gmail.com',
                 to: email,
                 subject: 'ListenCheck - Recupero Password',
                 text: text

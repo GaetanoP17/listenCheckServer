@@ -81,7 +81,7 @@ router.post('/invia', function (req, res, next) {
 
 
                 var mailOptions = {
-                    from: 'ubmplatform@gmail.com',
+                    from: 'listenCheck@gmail.com',
                     to: email,
                     subject: 'ListenCheck - Nuova richiesta di collaborazione',
                     text: text

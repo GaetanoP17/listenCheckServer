@@ -10,7 +10,6 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var update_suono = require('./routes/update_suono');
-var users = require('./routes/users');
 var menupaziente = require('./routes/menupaziente');
 var login = require('./routes/login');
 var insert_suono = require('./routes/insert_suono');

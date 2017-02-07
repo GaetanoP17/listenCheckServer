@@ -83,7 +83,7 @@ router.post('/codice', function (req, res, next) {
 
     var text = "Il codice di verifica per il tuo account è: " + codice;
     var mailOptions = {
-        from: 'ubmplatform@gmail.com',
+        from: 'listenCheck@gmail.com',
         to: email,
         subject: 'ListenCheck - Codice di verifica',
         text: text
