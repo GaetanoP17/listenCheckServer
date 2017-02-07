@@ -14,7 +14,6 @@ router.post('/crea', function (req, res, next) {
     var query = "INSERT INTO esercitazione (`decibel`, `frequenza`, `data`, `email`) VALUES ('"+decibel+"','"+frequenza;
     query += "','"+data+"','"+email+"')";
 
-    console.log("Query "+query);
     connection.query(query, function (err, rows, fields) {
         if (err) return console.log("Query error");
         var response = {"idEsercitazione": rows.insertId};
@@ -31,7 +30,6 @@ router.post('/salvaQuesito', function (req, res, next) {
     var query = "INSERT INTO composta (`id_esercitazione`, `id_suono`, `ascolti`, `esito`) VALUES ("+id_esercitazione+","+id_suono;
     query += ","+ascolti+","+esito+")";
 
-    console.log("Query "+query);
     connection.query(query, function (err, rows, fields) {
         if (err) return console.log("Query error");
         res.send(true);
@@ -63,7 +61,6 @@ router.post('/chiudi', function (req, res, next) {
         query = "UPDATE `account` SET `es_sospesa` = NULL WHERE `email` = '"+email+"'";
     }
 
-    console.log("Query "+query);
     connection.query(query, function (err, rows, fields) {
         if (err) return console.log("Query error");
         res.send(true);
@@ -121,7 +118,6 @@ router.post('/sospesa', function (req, res, next) {
                             "fascia": fascia,
                             "esiti": esiti
                         }
-                    console.log(JSON.stringify(response));
                     res.json(response);
                 }
             });
@@ -162,7 +158,6 @@ router.post('/inizializza', function (req, res, next) {
                     i--;
                 }
             }
-            console.log("Send the response to client..." + JSON.stringify(quesito));
             res.json(quesito);
         }
     });
@@ -174,11 +169,9 @@ router.post('/anomalia', function (req, res, next) {
 
     var query = "UPDATE `account` SET `es_sospesa` = NULL WHERE `email` = '"+email+"'";
 
-    console.log("Anomalia "+query);
     connection.query(query, function (err, rows, fields) {
         if (err) return console.log("Query error");
         query = "DELETE FROM `esercitazione` WHERE `id` = "+id_esercitazione;
-        console.log("Anomalia "+query);
         connection.query(query, function (err, rows, fields) {
             if (err) return console.log("Query error");
             res.send(true);

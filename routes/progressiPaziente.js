@@ -81,7 +81,6 @@ router.post('/', function (req, res, next) {
             }
             if(anomalia)
             {
-                console.log(elimina);
                 connection.query(elimina, function (err, rows, fields) {
                     if (err) return console.log("Query error");
                     if (response.length === 0)

@@ -33,7 +33,7 @@ connection.query('SELECT MAX(id)as id from suono', function(err, rows, fields) {
 
     var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
-            cb(null, './public/sounds/');
+            cb(null, './public/soundsUnchecked/');
         },
         filename: function (req, file, cb) {
             file.fieldname = numero;

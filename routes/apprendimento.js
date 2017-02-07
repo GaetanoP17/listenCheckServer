@@ -10,7 +10,6 @@ router.post('/suoniCategoria', function (req, res, next) {
 
     var select = "SELECT * FROM suono WHERE stato=1 AND categoria = '" + categoria + "'";
 
-    console.log("Query "+select);
     connection.query(select, function (err, rows, fields) {
         if (err) return console.log("Query error");
         if(rows.length == 0)
@@ -28,7 +27,6 @@ router.post('/suoniCategoria', function (req, res, next) {
                     "frequenza": rows[i].frequenza
                 });
             }
-            console.log(JSON.stringify(suoni));
             res.json(suoni);
         }
     });

@@ -39,7 +39,7 @@ router.post('/', function(req,res,next)
 	  categoria: req.body.descrizione,
 	  decibel: req.body.decibel,
 	  frequenza:req.body.frequenza,
-	  stato:1,
+        stato: 0,
 	  email:req.body.email
 	};
 	connection.query('INSERT INTO suono SET ?', post);
