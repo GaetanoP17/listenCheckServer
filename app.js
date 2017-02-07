@@ -67,7 +67,6 @@ app.use(function (req, res, next) {
     next();
 });
 app.use('/', index);
-app.use('/users', users);
 app.use('/login', login);
 app.use('/upload_image', upload_image);
 app.use('/delete_all', delete_all);
