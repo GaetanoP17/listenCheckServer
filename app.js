@@ -12,7 +12,6 @@ var update_suono = require('./routes/update_suono');
 var menupaziente = require('./routes/menupaziente');
 var login = require('./routes/login');
 var insert_suono = require('./routes/insert_suono');
-var delete_all = require('./routes/delete_all');
 var upload_image = require('./routes/upload_image');
 var upload_sound = require('./routes/upload_sound');
 var insert_datimedia = require('./routes/insert_datimedia');
@@ -66,7 +65,6 @@ app.use(function (req, res, next) {
 app.use('/', index);
 app.use('/login', login);
 app.use('/upload_image', upload_image);
-app.use('/delete_all', delete_all);
 app.use('/insert_datimedia', insert_datimedia);
 app.use('/upload_sound', upload_sound);
 app.use('/menucommunity', menucommunity);
