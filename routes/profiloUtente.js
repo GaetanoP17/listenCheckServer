@@ -23,7 +23,7 @@ router.post("/", function (req,res,next)
                     "cf": rows[0].cf,
                     "telefono": rows[0].telefono,
                     "citta": rows[0].citta,
-                    "pass": rows[0].password
+                    "pass": rows[0].password,
                 }
             res.json(response);
 

@@ -1,7 +1,6 @@
 var express = require('express');
 var cors = require('cors');
 var multer = require('multer');
-var findRemoveSync = require('find-remove');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -30,9 +29,7 @@ var mailer= require('./routes/mailer');
 var esercitazione = require('./routes/esercitazione');
 var apprendimento = require('./routes/apprendimento');
 var progressiPaziente = require('./routes/progressiPaziente');
-
-
-
+var profiloLogopedista = require('./routes/profiloLogopedista');
 
 var app = express();
 
@@ -86,12 +83,7 @@ app.use('/esercitazione', esercitazione);
 app.use('/apprendimento', apprendimento);
 app.use('/progressiPaziente', progressiPaziente);
 app.use('/menupaziente', menupaziente);
-
-
-
-
-
-
+app.use('/profiloLogopedista', profiloLogopedista)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

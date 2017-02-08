@@ -32,7 +32,6 @@ router.post('/', function(req,res,next)
 {
     var utente=req.body.utente;
     var genitore=req.body.genitore;
-    var codiceRicevuto = req.body.codice;
 
     //inserisco il nuovo utente
     connection.query('insert into account set ?', utente, function (err, rows) {

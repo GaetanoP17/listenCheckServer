@@ -26,7 +26,6 @@ router.post('/', function(req,res,next)
                     "nome": rows[0].nome,
                     "cognome": rows[0].cognome
                 }
-            console.log("Send the response to client..." + JSON.stringify(response));
             res.json(response);
         }
     });
