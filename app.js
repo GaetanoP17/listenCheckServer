@@ -82,23 +82,6 @@ app.use('/progressiPaziente', progressiPaziente);
 app.use('/menupaziente', menupaziente);
 app.use('/profiloLogopedista', profiloLogopedista)
 
-
-// Trusting Openshift proxy
-app.enable('trust proxy');
-// Http -> Https redirection middleware
-app.use(function (req, res, next) {
-
-    if (req.headers['x-forwarded-proto'] === 'http') {
-
-        var tmp = 'https://' + req.headers.host + req.originalUrl;
-        res.redirect(tmp);
-
-    } else {
-
-        return next();
-    }
-
-});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
