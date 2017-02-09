@@ -85,7 +85,6 @@ app.use('/profiloLogopedista', profiloLogopedista)
 
 // Trusting Openshift proxy
 app.enable('trust proxy');
-console.log(self);
 // Http -> Https redirection middleware
 app.use(function (req, res, next) {
 
