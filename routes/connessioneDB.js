@@ -8,11 +8,10 @@ var mysql = require('mysql');
 function connectionDB()
 {
     var connection = mysql.createConnection({
-        host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
-        user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
-        password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
-        port     : process.env.OPENSHIFT_MYSQL_DB_PORT,
-        database : process.env.OPENSHIFT_APP_NAME
+        host: 'sql11.freemysqlhosting.net',
+        user: 'sql11158045',
+        password: 'RS8TAKaccm',
+        database: 'sql11158045'
     })
 
     connection.connect(function(err) {
