@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var find_remove = require('find-remove');
 
 var index = require('./routes/index');
 var update_suono = require('./routes/update_suono');
@@ -29,6 +30,7 @@ var esercitazione = require('./routes/esercitazione');
 var apprendimento = require('./routes/apprendimento');
 var progressiPaziente = require('./routes/progressiPaziente');
 var profiloLogopedista = require('./routes/profiloLogopedista');
+var delete_all = require('./routes/delete_all');
 
 var app = express();
 
@@ -80,7 +82,8 @@ app.use('/esercitazione', esercitazione);
 app.use('/apprendimento', apprendimento);
 app.use('/progressiPaziente', progressiPaziente);
 app.use('/menupaziente', menupaziente);
-app.use('/profiloLogopedista', profiloLogopedista)
+app.use('/profiloLogopedista', profiloLogopedista);
+app.use('/delete_all', delete_all);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

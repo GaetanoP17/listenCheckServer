@@ -2,7 +2,8 @@
 var multer=require('multer');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+var connection = require('./connessioneDB');
+
 var numero;
 
 router.get('/', function(req, res,next){
@@ -10,20 +11,9 @@ router.get('/', function(req, res,next){
 
 });
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'listencheck'
-});
-
-
-
-connection.connect;
-
 router.post('/', function(req,res,next)
 {
-	connection.query('SELECT * from suono WHERE stato=1', function(err, rows, fields) {
+	connection.query('SELECT DISTINCT categoria  from suono WHERE stato=1', function(err, rows, fields) {
     if (!err){
 				    res.send(rows);
 

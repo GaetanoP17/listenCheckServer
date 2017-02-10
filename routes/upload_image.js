@@ -10,7 +10,8 @@ var numero;
 /** API path that will upload the files */
 router.post('/', function (req, res) {
     connection.query('SELECT MAX(id)as id from suono', function (err, rows, fields) {
-        if (!err) {
+        if (!err) 
+        {
             id = rows[0].id;
             numero = String(id) + ".png";
             var storage = multer.diskStorage({ //multers disk storage settings
@@ -25,12 +26,15 @@ router.post('/', function (req, res) {
             var upload = multer({ //multer settings
                     storage: storage
                 }).single('file');
-            upload(req, res, function (err) {
-                if (err) {
+            upload(req, res, function (err) 
+            {
+                if (err)
+                {
                     res.json({error_code: 1, err_desc: err});
                     return;
                 }
-                res.json({error_code: 0, err_desc: null});
+                //res.json({error_code: 0, err_desc: null});
+                res.send(true);
             });
         }
         else
