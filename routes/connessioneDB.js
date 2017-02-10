@@ -8,10 +8,10 @@ var mysql = require('mysql');
 function connectionDB()
 {
     var connection = mysql.createConnection({
-        host: 'sql11.freemysqlhosting.net',
-        user: 'sql11158045',
-        password: 'RS8TAKaccm',
-        database: 'sql11158045'
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'listencheck'
     })
 
     connection.connect(function(err) {

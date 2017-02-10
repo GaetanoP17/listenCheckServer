@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
                         esercitazione = new Array();
                     }
                     else if ((esercitazione.length >= min) && (esercitazione.length <= max)) {
-                        if (rows[i - 1].decibel == null) {
+                        if (rows[i - 1].decibel === 'null') {
                             tipo = "frequenza";
                             fascia = rows[i - 1].frequenza;
                         } else {
