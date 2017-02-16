@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
 var connection = require('./connessioneDB');
 
 router.post('/', function(req,res,next)
@@ -14,7 +13,7 @@ router.post('/', function(req,res,next)
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
-        if ( rows.length == 0)
+        if ( rows.length === 0)
             res.send("Nologin");
         else
         {
@@ -26,8 +25,32 @@ router.post('/', function(req,res,next)
                     "nome": rows[0].nome,
                     "cognome": rows[0].cognome
                 }
+                
+                if (rows[0].stato === 3)
+                {
+                    var queryString= "UPDATE account SET stato = 0 Where email=" + connection.escape(email);
+
+                    connection.query(queryString , function(err)
+                    {
+                        if(err) throw err;
+                    });
+                }
             res.json(response);
         }
     });
 });
+
+router.post('/disattiva', function(req,res,next)
+{
+    var email=req.body.email.toLowerCase();
+    var queryString= "UPDATE account SET stato = 3 Where email=" + connection.escape(email);
+    
+    connection.query(queryString , function(err)
+    {
+        if(err) throw err;
+        
+            res.send(true);
+    });
+});
+
 module.exports = router;

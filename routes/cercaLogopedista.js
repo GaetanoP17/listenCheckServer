@@ -8,7 +8,7 @@ var connection = require('./connessioneDB');
 var transporter = require('./mailer');
 
 router.post('/', function (req, res, next) {
-    var queryString = "SELECT * FROM account WHERE tipo = 'L'";
+    var queryString = "SELECT * FROM account WHERE tipo = 'L' AND stato != 3";
 
     connection.query(queryString, function (err, rows) {
         var response;

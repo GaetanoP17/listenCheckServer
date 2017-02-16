@@ -15,7 +15,7 @@ router.post('/', function(req,res,next)
     connection.query(queryString, function(err,rows)
     {
         if(err) throw err;
-        if ( rows.length == 0)
+        if ( rows.length === 0)
             res.send("NoMatch");
         else
         {
@@ -38,7 +38,7 @@ router.post('/', function(req,res,next)
                 {
                     res.send("Inviata");
                 }
-            })
+            });
         }
     });
 
