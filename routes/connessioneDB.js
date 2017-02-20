@@ -7,6 +7,7 @@ var mysql = require('mysql');
 
 function connectionDB()
 {
+	//Settare i parametri per la connessione al database
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',

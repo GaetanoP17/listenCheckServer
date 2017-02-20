@@ -8,7 +8,7 @@ var connection = require('./connessioneDB');
 var transporter = require('./mailer');
 
 router.post('/', function (req, res, next) {
-    var queryString = "SELECT * FROM account WHERE tipo = 'L' AND stato != 3";
+    var queryString = "SELECT * FROM account WHERE tipo = 'L'";
 
     connection.query(queryString, function (err, rows) {
         var response;
@@ -18,7 +18,8 @@ router.post('/', function (req, res, next) {
                 "nome": rows[i].nome,
                 "cognome": rows[i].cognome,
                 "citta": rows[i].citta,
-                "email": rows[i].email
+                "email": rows[i].email,
+                "stato": rows[i].stato
             })
         }
         response = terapisti;
@@ -34,6 +35,7 @@ router.post('/mio', function (req, res, next) {
         if (err) throw err;
 
         var response = rows[0].logopedista;
+        console.log(response);
         res.send(response);
     });
 });

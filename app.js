@@ -85,7 +85,12 @@ app.use('/menupaziente', menupaziente);
 app.use('/profiloLogopedista', profiloLogopedista);
 app.use('/delete_all', delete_all);
 
-// catch 404 and forward to error handler
+//decommentare per scegliere la porta in ascolto
+/*var listener = app.listen(8888, function(){
+    console.log('Listening on port ' + listener.address().port); //Listening on port 8888
+});*/
+
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
