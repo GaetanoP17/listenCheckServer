@@ -11,7 +11,7 @@ router.post('/crea', function (req, res, next) {
     var data = req.body.data;
 
     var query = "INSERT INTO esercitazione (`decibel`, `frequenza`, `data`, `email`) VALUES ('"+decibel+"','"+frequenza;
-    query += "','"+data+"','"+email+"')";
+    query += "','"+data.substring(0,10)+"','"+email+"')";
 
     connection.query(query, function (err, rows, fields) {
         if (err) return console.log("Query error");
