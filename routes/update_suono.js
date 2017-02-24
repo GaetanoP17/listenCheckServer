@@ -23,7 +23,7 @@ router.post('/', function(req,res,next)
     {
         connection.query('UPDATE suono SET ? WHERE id = ?', [post, scelta]);
         
-        var text = "Salve, il suono da lei condiviso è " + post.nome + "e corrisponde alla categoria " + post.categoria + "";
+        var text = "Salve, il suono da lei condiviso è " + post.nome + " e corrisponde alla categoria " + post.categoria + "";
         text= text + "\n\n Saluti, \n\n\n ListenCheck";
         
         var mailOptions = {

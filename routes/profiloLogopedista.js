@@ -32,7 +32,7 @@ router.post("/update", function (req, res, next) {
     var email = req.body.email;
     var nome = req.body.nome;
     var cognome = req.body.cognome;
-    var data = req.body.data;
+    var data = req.body.data.substring(0,10);
     var sesso = req.body.sesso;
     var piva = req.body.piva;
     var telefono = req.body.telefono;
