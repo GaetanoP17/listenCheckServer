@@ -86,9 +86,9 @@ app.use('/profiloLogopedista', profiloLogopedista);
 app.use('/delete_all', delete_all);
 
 //decommentare per scegliere la porta in ascolto
-/*var listener = app.listen(8888, function(){
-    console.log('Listening on port ' + listener.address().port); //Listening on port 8888
-});*/
+var listener = app.listen(443, function(){
+    console.log('Listening on port ' + listener.address().port); //Listening on port 443
+});
 
 
 app.use(function(req, res, next) {
